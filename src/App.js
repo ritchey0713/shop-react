@@ -38,6 +38,8 @@ class App extends Component {
               ...snapShot.data()
             }
           })
+
+          console.log(this.state)
         })
       } else {
         //if we have no userAuth reset currentuser to null, 
