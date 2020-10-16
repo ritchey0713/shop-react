@@ -29,7 +29,7 @@ class App extends Component {
   }
 
   componentWillUnmount(){
-   // only triggered to stop listening when leaving application.
+   // only triggered to stop listening when leaving application. 
     this.unsubscribeFromAuth()
   }
 
