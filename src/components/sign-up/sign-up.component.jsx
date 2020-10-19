@@ -39,7 +39,7 @@ class SignUp extends Component {
         confirmPassword: ""
       })
     }catch(err){
-      console.log("ERROR CREATING USER", err)
+      console.log("ERROR CREATING USER", err.message)
     }
   }
 
