@@ -4,7 +4,7 @@ export const addItemToCart = (cartItems, cartitemToAdd) => {
   );
   if (existingCartItem) {
     return cartItems.map((cartItem) =>
-      cartItem.id === cartitemToAdd
+      cartItem.id === cartitemToAdd.id
         ? { ...cartItem, quantity: (cartItem.quantity += 1) }
         : { ...cartItem }
     );
