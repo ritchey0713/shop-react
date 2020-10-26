@@ -7,6 +7,7 @@ import HomePage from "./containers/homepage/homepage.component";
 import ShopPage from "./containers/shop/shop.component";
 import Header from "./components/header/header.component";
 import SignInAndSignUpPage from "./containers/sign-in-and-sign-up/sign-in-and-sign-up.component";
+import CheckoutPage from "./containers/check-out/check-out.component";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { createStructuredSelector } from "reselect";
@@ -58,6 +59,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckoutPage} />
           <Route
             exact
             path="/signin"
