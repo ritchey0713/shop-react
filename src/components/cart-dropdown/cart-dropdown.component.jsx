@@ -1,18 +1,24 @@
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import CartItem from "../cart-item/cart-item.component";
 import { selectCartitems } from "../../redux/cart/cart.selectors.js";
 import CustomButton from "../custom-button/custom-button.component";
 import "./cart-dropdown.styles.scss";
+import { createStructuredSelector } from "reselect";
 
-const Cart = ({ cartItems }) => (
+const Cart = ({ cartItems, history }) => (
   <div className="cart-dropdown">
     <div className="cart-items">
-      {cartItems.map((item) => (
-        <CartItem key={item.id} item={item} />
-      ))}
+      {cartItems.length ? (
+        cartItems.map((item) => <CartItem key={item.id} item={item} />)
+      ) : (
+        <span className="empty-message">The cart is empty</span>
+      )}
     </div>
-    <CustomButton>CHECKOUT</CustomButton>
+    <CustomButton onClick={() => history.push("/checkout")}>
+      CHECKOUT
+    </CustomButton>
   </div>
 );
 
@@ -20,8 +26,9 @@ const Cart = ({ cartItems }) => (
 //   cartItems,
 // });
 
-const mapStateToProps = (state) => ({
-  cartItems: selectCartitems(state),
+const mapStateToProps = createStructuredSelector({
+  cartItems: selectCartitems,
 });
 
-export default connect(mapStateToProps)(Cart);
+//withRouter can take a comp as an arg, including connected comps
+export default withRouter(connect(mapStateToProps)(Cart));
