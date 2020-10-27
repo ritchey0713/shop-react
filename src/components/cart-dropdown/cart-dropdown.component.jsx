@@ -6,8 +6,9 @@ import { selectCartitems } from "../../redux/cart/cart.selectors.js";
 import CustomButton from "../custom-button/custom-button.component";
 import "./cart-dropdown.styles.scss";
 import { createStructuredSelector } from "reselect";
+import { toggleCartHidden } from "../../redux/cart/cart.actions.js";
 
-const Cart = ({ cartItems, history }) => (
+const Cart = ({ cartItems, history, toggleCartHidden }) => (
   <div className="cart-dropdown">
     <div className="cart-items">
       {cartItems.length ? (
@@ -16,7 +17,12 @@ const Cart = ({ cartItems, history }) => (
         <span className="empty-message">The cart is empty</span>
       )}
     </div>
-    <CustomButton onClick={() => history.push("/checkout")}>
+    <CustomButton
+      onClick={() => {
+        toggleCartHidden();
+        history.push("/checkout");
+      }}
+    >
       CHECKOUT
     </CustomButton>
   </div>
@@ -31,4 +37,4 @@ const mapStateToProps = createStructuredSelector({
 });
 
 //withRouter can take a comp as an arg, including connected comps
-export default withRouter(connect(mapStateToProps)(Cart));
+export default withRouter(connect(mapStateToProps, { toggleCartHidden })(Cart));
