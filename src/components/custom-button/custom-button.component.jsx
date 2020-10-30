@@ -1,20 +1,10 @@
 import React from "react";
 import "./custom-button.styles.scss";
+import { CustomButtonStyles } from "./custom-button.styles";
 
 //children prop allows you to grab w/e is in between opening and closing tags
-const CustomButton = ({
-  children,
-  isGoogleSignIn,
-  inverted,
-  ...otherProps
-}) => (
-  <button
-    className={`${inverted ? "inverted" : ""}
-    ${isGoogleSignIn ? "google-sign-in" : ""} custom-button `}
-    {...otherProps}
-  >
-    {children}
-  </button>
+const CustomButton = ({ children, ...otherProps }) => (
+  <CustomButtonStyles {...otherProps}>{children}</CustomButtonStyles>
 );
 
 export default CustomButton;
