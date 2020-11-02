@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { auth, signInWithGoogle } from "../../firebase/firebase.utils"
 import CustomButton from "../custom-button/custom-button.component"
 import FormInput from "../form-input/form-input.component"
+import { StyledButtonsWrapper, StyledSignUp } from "./sign-in.styles"
 import "./sign-in.styles.scss"
 
 
@@ -37,7 +38,7 @@ class SignIn extends Component {
 
   render(){
     return(
-      <div className="sign-in">
+      <StyledSignUp>
         <h2>
           I already have an account
         </h2>
@@ -59,14 +60,13 @@ class SignIn extends Component {
             label="password"
           />
           
-          <div className="buttons">
+          <StyledButtonsWrapper>
             <CustomButton type="submit">Sign In</CustomButton>
             <CustomButton onClick={signInWithGoogle} isGoogleSignIn>Sign In with google</CustomButton>
-
-          </div>
+          </StyledButtonsWrapper>
 
         </form>
-      </div>
+      </StyledSignUp>
     )
   }
 }
