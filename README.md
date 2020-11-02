@@ -66,3 +66,12 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+### check out balh.com -> colors(blue: (they)header -> use this for card backdrop)
+
+### check learn.co -> sizing/card spacing 
+
+## use amazon layout -> button/product placement
+
+### google font -> fira code, helvetica, -> 
