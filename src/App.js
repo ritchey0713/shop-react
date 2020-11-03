@@ -49,7 +49,11 @@ class App extends Component {
         setCurrentUser(userAuth);
       }
     });
-    addCollectionAndDocuments("collections", collections);
+    //use this to update the shop collections (add new items to the shop)
+    // addCollectionAndDocuments(
+    //   "collections",
+    //   collections.map(({ title, items }) => ({ title, items }))
+    // );
   }
 
   componentWillUnmount() {
