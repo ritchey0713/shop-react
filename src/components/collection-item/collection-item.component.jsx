@@ -1,8 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addItem } from "../../redux/cart/cart.actions";
+import { withRouter } from "react-router-dom";
 import CustomButton from "../custom-button/custom-button.component";
-import { StyledPrice, StyledCollectionItem, StyledFooter, StyledImage, StyledName, AddButton } from "./collection-item.styles"
+import {
+  StyledPrice,
+  StyledCollectionItem,
+  StyledFooter,
+  StyledImage,
+  StyledName,
+  AddButton,
+} from "./collection-item.styles";
 
 import "./collection-item.styles.scss";
 
@@ -10,7 +18,7 @@ const CollectionItem = ({ item, addItem }) => {
   const { name, price, imageUrl } = item;
   return (
     <StyledCollectionItem>
-      <StyledImage imageUrl={imageUrl}/>
+      <StyledImage imageUrl={imageUrl} />
       <StyledFooter>
         <StyledName>{name}</StyledName>
 
