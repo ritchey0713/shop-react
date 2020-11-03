@@ -34,9 +34,21 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-export const addCollectionAndDocuments = (collectionKey, ObjectsToAdd) => {
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  ObjectsToAdd
+) => {
   const collectionRef = firestore.collection(collectionKey);
-  console.log(collectionRef);
+
+  //batching sets thiings up so if a single failure happens they all fail (keeps db from having issues not having all data)
+  const batch = firestore.batch();
+  ObjectsToAdd.forEach((obj) => {
+    //generates new firestore id for each obj
+    const newDocRef = collectionRef.doc();
+    // we pass the docref obj that has our id, and the original obj we want to save
+    batch.set(newDocRef, obj);
+  });
+  await batch.commit();
 };
 
 firebase.initializeApp(config);
