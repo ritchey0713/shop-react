@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import styled from "styled-components";
 
 import "./App.css";
 import HomePage from "./containers/homepage/homepage.component";
@@ -9,16 +8,20 @@ import ShopPage from "./containers/shop/shop.component";
 import Header from "./components/header/header.component";
 import SignInAndSignUpPage from "./containers/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import CheckoutPage from "./containers/check-out/check-out.component";
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import {
+  auth,
+  createUserProfileDocument,
+  addCollectionAndDocuments,
+} from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "./redux/user/user.selectors";
-
+import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 class App extends Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUser, collections } = this.props;
 
     // auth comes from firebase
     // user in callback is user state
@@ -46,6 +49,7 @@ class App extends Component {
         setCurrentUser(userAuth);
       }
     });
+    addCollectionAndDocuments("collections", collections);
   }
 
   componentWillUnmount() {
@@ -81,6 +85,7 @@ class App extends Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  collections: selectCollectionsForPreview,
 });
 
 export default connect(mapStateToProps, { setCurrentUser })(App);
