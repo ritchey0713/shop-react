@@ -1,11 +1,17 @@
 import React from "react";
 import "./collection-preview.styles.scss";
 import CollectionItem from "../collection-item/collection-item.component";
-import { StyledCollectionWrapper, StyledPreview, StyledTitle } from "./collection-preview.styles"
+import {
+  StyledCollectionWrapper,
+  StyledPreview,
+  StyledTitle,
+} from "./collection-preview.styles";
 
-const CollectionPreview = ({ title, items }) => (
+const CollectionPreview = ({ title, items, ...otherProps }) => (
   <StyledCollectionWrapper>
-    <StyledTitle>{title.toUpperCase()}</StyledTitle>
+    <StyledTitle to={`${otherProps.path}/${otherProps.routeName}`}>
+      {title.toUpperCase()}
+    </StyledTitle>
     <StyledPreview>
       {items
         .filter((item, index) => index < 4)
