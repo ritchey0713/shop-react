@@ -23,10 +23,11 @@ export const selectCollection = (collectionUrlParam) =>
     //   (collection) => collection.id === COLLECTION_ID_MAP[collectionUrlParam]
     // )
     // after normalizing data
-    (collections) => collections[collectionUrlParam]
+    (collections) => (collections ? collections[collectionUrlParam] : null)
   );
 
 export const selectCollectionsForPreview = createSelector(
   [selectCollections],
-  (collections) => Object.keys(collections).map((key) => collections[key])
+  (collections) =>
+    collections ? Object.keys(collections).map((key) => collections[key]) : []
 );
