@@ -3,11 +3,11 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "./App.css";
-import HomePage from "./containers/homepage/homepage.component";
-import ShopPage from "./containers/shop/shop.component";
+import HomePage from "./pages/homepage/homepage.component";
+import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
-import SignInAndSignUpPage from "./containers/sign-in-and-sign-up/sign-in-and-sign-up.component";
-import CheckoutPage from "./containers/check-out/check-out.component";
+import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
+import CheckoutPage from "./pages/check-out/check-out.component";
 import {
   auth,
   createUserProfileDocument,
