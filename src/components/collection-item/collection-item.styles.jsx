@@ -50,7 +50,7 @@ export const StyledFooter = styled.div`
   font-size: 18px;
 `;
 
-export const StyledName = styled(Link)`
+export const StyledName = styled.span`
   width: 90%;
   margin-bottom: 15px;
 `;
