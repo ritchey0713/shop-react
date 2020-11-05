@@ -1,4 +1,4 @@
-import { createSelector } from "reselect";
+import { createSelector, createStructuredSelector } from "reselect";
 
 // const COLLECTION_ID_MAP = {
 //   hats: 1,
@@ -30,4 +30,16 @@ export const selectCollectionsForPreview = createSelector(
   [selectCollections],
   (collections) =>
     collections ? Object.keys(collections).map((key) => collections[key]) : []
+);
+
+export const selectIsCollectionFetching = createSelector(
+  [selectShop],
+  (shop) => shop.isFetching
+);
+
+//selector to make sure shops is loaded
+
+export const selectIsCollectionsLoaded = createSelector(
+  [selectShop],
+  (shop) => !!shop.collections
 );
