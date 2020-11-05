@@ -1,4 +1,4 @@
-import SHOP_DATA from "../../containers/shop/shop.data";
+// import SHOP_DATA from "../../pages/shop/shop.data";
 import ShopActionTypes from "./shop.types";
 
 const INITIAL_STATE = {
@@ -15,6 +15,7 @@ const shopReducer = (state = INITIAL_STATE, action) => {
         isFetching: true,
       };
     case ShopActionTypes.FETCH_COLLECTIONS_SUCCESS:
+      console.log("Here?");
       return {
         ...state,
         isFetching: false,
