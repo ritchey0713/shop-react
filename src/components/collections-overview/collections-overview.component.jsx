@@ -6,13 +6,19 @@ import CollectionPreview from "../collection-preview/collection-preview.componen
 import "./collections-overview.styles.scss";
 import { StyledOverview } from "./collections-overview.styles";
 
-const CollectionOverview = ({ collections, path }) => (
-  <StyledOverview>
-    {collections.map(({ id, ...otherCollectionProps }) => (
-      <CollectionPreview key={id} path={path} {...otherCollectionProps} />
-    ))}
-  </StyledOverview>
-);
+const CollectionOverview = ({ collections, ...otherProps }) => {
+  return (
+    <StyledOverview>
+      {collections.map(({ id, ...otherCollectionProps }) => (
+        <CollectionPreview
+          key={id}
+          path={otherProps.match.path}
+          {...otherCollectionProps}
+        />
+      ))}
+    </StyledOverview>
+  );
+};
 
 const mapStateToProps = createStructuredSelector({
   collections: selectCollectionsForPreview,
