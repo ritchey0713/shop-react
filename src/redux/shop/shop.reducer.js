@@ -15,7 +15,6 @@ const shopReducer = (state = INITIAL_STATE, action) => {
         isFetching: true,
       };
     case ShopActionTypes.FETCH_COLLECTIONS_SUCCESS:
-      console.log("Here?");
       return {
         ...state,
         isFetching: false,
