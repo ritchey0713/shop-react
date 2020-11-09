@@ -28,28 +28,29 @@ class App extends Component {
     // user in callback is user state
     // auth is a subscription
     // set to unsubscribeFromAuth to call it as a function to close
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      // this.setState({ currentUser: user })
-      // createUserProfileDocument(userAuth)
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        //get a snapshop using .onSnapShot
-        userRef.onSnapshot((snapShot) => {
-          // .data() gives us json of everything BUT the obj id
-          // console.log(snapShot.data())
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data(),
-          });
-        });
-      } else {
-        //if we have no userAuth reset currentuser to null,
-        // this is also triggered by the auth.signOut() in the header
+    // USING SUBCRIBING TO GET CURRENT USER (PRE SAGA)
+    // this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+    //   // this.setState({ currentUser: user })
+    //   // createUserProfileDocument(userAuth)
+    //   if (userAuth) {
+    //     const userRef = await createUserProfileDocument(userAuth);
+    //     //get a snapshop using .onSnapShot
+    //     userRef.onSnapshot((snapShot) => {
+    //       // .data() gives us json of everything BUT the obj id
+    //       // console.log(snapShot.data())
+    //       setCurrentUser({
+    //         id: snapShot.id,
+    //         ...snapShot.data(),
+    //       });
+    //     });
+    //   } else {
+    //     //if we have no userAuth reset currentuser to null,
+    //     // this is also triggered by the auth.signOut() in the header
 
-        // setCurrentUser(null);
-        setCurrentUser(userAuth);
-      }
-    });
+    //     // setCurrentUser(null);
+    //     setCurrentUser(userAuth);
+    //   }
+    // });
     //use this to update the shop collections (add new items to the shop)
     // addCollectionAndDocuments(
     //   "collections",
