@@ -37,8 +37,9 @@ export function* fetchCollectionsAsync() {
   //   .catch((error) => dispatch(fetchCollectionFailure(error.message)));
 }
 
-export function* fetchCollectionsStart() {
+export function* fetchCollectionStart() {
   //takeEvery is non-blocking, allows app to keep moving while this code is running
+  //knows which sage to run by first arg, being the "type", then calls second arg
   yield takeEvery(
     ShopActionTypes.FETCH_COLLECTIONS_START,
     fetchCollectionsAsync
