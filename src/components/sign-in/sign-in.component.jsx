@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
 import CustomButton from "../custom-button/custom-button.component";
 import FormInput from "../form-input/form-input.component";
 import { StyledButtonsWrapper, StyledSignUp } from "./sign-in.styles";
-import "./sign-in.styles.scss";
-import { googleSignInStart } from "../../redux/user/user.actions.js";
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from "../../redux/user/user.actions.js";
 import { connect } from "react-redux";
 
 class SignIn extends Component {
@@ -19,15 +20,17 @@ class SignIn extends Component {
 
   handleSignInSubmit = async (e) => {
     e.preventDefault();
-
+    const { emailSignInStart } = this.props;
     const { email, password } = this.state;
+    emailSignInStart({ email, password });
 
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      this.setState({ email: "", password: "" });
-    } catch (e) {
-      console.log("ERROR SIGNING IN", e.message);
-    }
+    //PRE SAGA CODE
+    // try {
+    //   await auth.signInWithEmailAndPassword(email, password);
+    //   this.setState({ email: "", password: "" });
+    // } catch (e) {
+    //   console.log("ERROR SIGNING IN", e.message);
+    // }
   };
 
   handleSignInChange = (e) => {
@@ -76,4 +79,4 @@ class SignIn extends Component {
   }
 }
 
-export default connect(null, { googleSignInStart })(SignIn);
+export default connect(null, { googleSignInStart, emailSignInStart })(SignIn);
