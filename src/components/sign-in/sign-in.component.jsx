@@ -18,7 +18,7 @@ class SignIn extends Component {
     };
   }
 
-  handleSignInSubmit = async (e) => {
+  handleSignInSubmit = (e) => {
     e.preventDefault();
     const { emailSignInStart } = this.props;
     const { email, password } = this.state;
