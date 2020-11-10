@@ -12,11 +12,13 @@ import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 import CheckOutContainer from "./pages/check-out/check-out.container";
+import { checkUserSession } from "./redux/user/user.actions";
 class App extends Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser, collections } = this.props;
+    const { setCurrentUser, collections, checkUserSession } = this.props;
+    checkUserSession();
 
     // auth comes from firebase
     // user in callback is user state
@@ -90,4 +92,4 @@ const mapStateToProps = createStructuredSelector({
 
 // pre saga get current user
 // export default connect(mapStateToProps, { setCurrentUser })(App);
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { checkUserSession })(App);
