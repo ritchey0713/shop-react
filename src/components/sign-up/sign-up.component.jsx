@@ -1,58 +1,63 @@
-import React, { Component } from "react"
-import { auth, createUserProfileDocument } from "../../firebase/firebase.utils"
-import CustomButton from "../custom-button/custom-button.component"
-import FormInput from "../form-input/form-input.component"
-import { StyledSignUp } from "./sign-up.styles"
-import "./sign-up.styles.scss"
+import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
+import { emailSignUpStart } from "../../redux/user/user.actions";
+import CustomButton from "../custom-button/custom-button.component";
+import FormInput from "../form-input/form-input.component";
+import { StyledSignUp } from "./sign-up.styles";
+import "./sign-up.styles.scss";
 
 class SignUp extends Component {
-  constructor(){
-    super()
+  constructor() {
+    super();
 
     this.state = {
       displayName: "",
       email: "",
       password: "",
-      confirmPassword: ""
-    }
+      confirmPassword: "",
+    };
   }
 
-  handleSignUpSubmit = async (e) => {
-    console.log("in submit event")
-    e.preventDefault()
-    const { displayName, email, password, confirmPassword } = this.state
+  handleSignUpSubmit = (e) => {
+    e.preventDefault();
+    const { emailSignUpStart } = this.props;
+    const { displayName, email, password, confirmPassword } = this.state;
 
-    if(password !== confirmPassword) {
-      alert("passwords do not match")
-      return
+    if (password !== confirmPassword) {
+      alert("passwords do not match");
+      return;
     }
 
-    try{
-      console.log("in try block")
-      // all we care about is the user obj to pass on
-      const { user } = await auth.createUserWithEmailAndPassword(email, password)
-      // pass data to utils func to send to firestore
-      await createUserProfileDocument(user, { displayName })
-      this.setState({
-        displayName: "",
-        email: "",     
-        password: "",
-        confirmPassword: ""
-      })
-    }catch(err){
-      console.log("ERROR CREATING USER", err.message)
-    }
-  }
+    emailSignUpStart(this.state);
+    //pre saga code
+    // try{
+    //   console.log("in try block")
+    //   // all we care about is the user obj to pass on
+    //   const { user } = await auth.createUserWithEmailAndPassword(email, password)
+    //   // pass data to utils func to send to firestore
+    //   await createUserProfileDocument(user, { displayName })
+    //   this.setState({
+    //     displayName: "",
+    //     email: "",
+    //     password: "",
+    //     confirmPassword: ""
+    //   })
+    // }catch(err){
+    //   console.log("ERROR CREATING USER", err.message)
+    // }
+  };
 
   handleFormInputChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     this.setState({
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
 
-  render(){
-    const { displayName, email, password, confirmPassword } = this.state
+  render() {
+    const { displayName, email, password, confirmPassword } = this.state;
     return (
       <StyledSignUp>
         <h2 className="title">I do not have an account</h2>
@@ -61,7 +66,7 @@ class SignUp extends Component {
           <FormInput
             type="text"
             name="displayName"
-            value={ displayName }
+            value={displayName}
             onChange={this.handleFormInputChange}
             label="Display Name"
             required
@@ -70,7 +75,7 @@ class SignUp extends Component {
           <FormInput
             type="email"
             name="email"
-            value={ email }
+            value={email}
             onChange={this.handleFormInputChange}
             label="Email"
             required
@@ -79,7 +84,7 @@ class SignUp extends Component {
           <FormInput
             type="password"
             name="password"
-            value={ password }
+            value={password}
             onChange={this.handleFormInputChange}
             label="Password"
             required
@@ -88,7 +93,7 @@ class SignUp extends Component {
           <FormInput
             type="password"
             name="confirmPassword"
-            value={ confirmPassword }
+            value={confirmPassword}
             onChange={this.handleFormInputChange}
             label="Confirm Password"
             required
@@ -96,8 +101,8 @@ class SignUp extends Component {
           <CustomButton type="submit">Sign Up</CustomButton>
         </form>
       </StyledSignUp>
-    )
+    );
   }
 }
 
-export default SignUp
+export default connect(null, { emailSignUpStart })(SignUp);
