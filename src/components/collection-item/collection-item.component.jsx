@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addItem } from "../../redux/cart/cart.actions";
-import { withRouter } from "react-router-dom";
-import CustomButton from "../custom-button/custom-button.component";
+// import { withRouter } from "react-router-dom";
+// import CustomButton from "../custom-button/custom-button.component";
 import {
   StyledPrice,
   StyledCollectionItem,
