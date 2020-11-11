@@ -6,7 +6,6 @@
 
 import styled from "styled-components";
 import CustomButton from "../custom-button/custom-button.component";
-import { Link } from "react-router-dom";
 
 export const StyledCollectionItem = styled.div`
   width: 22vw;
