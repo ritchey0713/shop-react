@@ -18,7 +18,7 @@
 /client/.env.test.local
 /client/.env.production.local
 
-./client/src/firebase/firebase.secrets.js
+/client/src/firebase/firebase.secrets.js
 
 /client/npm-debug.log*
 /client/yarn-debug.log*
