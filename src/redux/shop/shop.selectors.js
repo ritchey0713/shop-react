@@ -1,4 +1,4 @@
-import { createSelector, createStructuredSelector } from "reselect";
+import { createSelector } from "reselect";
 
 // const COLLECTION_ID_MAP = {
 //   hats: 1,
