@@ -14,6 +14,7 @@ import { selectCurrentUser } from "./redux/user/user.selectors";
 import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 import CheckOutContainer from "./pages/check-out/check-out.container";
 import { checkUserSession } from "./redux/user/user.actions";
+import { firestore } from "./firebase/firebase.utils";
 const App = ({ checkUserSession, currentUser }) => {
   // pass [checkUserSession as it is passed in from mapDIspatch, so it wont allow it to fire several times]
   useEffect(() => {
@@ -71,7 +72,6 @@ const App = ({ checkUserSession, currentUser }) => {
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
         <Route exact path="/checkout" component={CheckOutContainer} />
-
         <Route
           exact
           path="/signin"
