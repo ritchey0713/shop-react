@@ -9,7 +9,7 @@ import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloClient, gql } from "apollo-boost";
 import "./index.css";
-import App from "./App";
+import App from "./App/App";
 
 import { resolvers, typeDefs } from "./graphql/resolvers";
 
@@ -52,6 +52,8 @@ client.writeData({
   data: {
     cartHidden: true,
     cartItems: [],
+    itemCount: 0,
+    currentUser: null,
   },
 });
 
