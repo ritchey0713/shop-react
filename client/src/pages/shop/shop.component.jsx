@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
 import { default as CollectionsOverview } from "../../components/collections-overview/collections-overview.graphql-container";
-import CollectionPageContainer from "../collection/collection.container";
+import CollectionPageContainer from "../collection/collection.container-graphql";
 
 const ShopPage = ({ match, fetchCollectionsStart }) => {
   //pre hooks
