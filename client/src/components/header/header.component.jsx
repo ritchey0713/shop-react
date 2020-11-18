@@ -11,7 +11,7 @@ import {
   OptionLink,
   OptionsContainer,
 } from "./header.styles";
-import CartIcon from "../cart-icon/cart-icon.component";
+import { default as CartIcon } from "../cart-icon/cart-icon.container";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import { signOutStart } from "../../redux/user/user.actions.js";
 
@@ -39,7 +39,6 @@ const Header = ({ currentUser, hidden, signOutStart }) => (
 // short hand for passing state to selectors
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  hidden: selectCartHidden,
 });
 
 export default connect(mapStateToProps, { signOutStart })(Header);
