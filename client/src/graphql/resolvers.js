@@ -1,4 +1,5 @@
 import { gql } from "apollo-boost";
+import { addItemToCart } from "./cart.utils";
 
 // entend to eisting type of mutation on backend (graphql server)
 // type definitions must be capitalized
@@ -20,6 +21,12 @@ const GET_CART_HIDDEN = gql`
   }
 `;
 
+const GET_CART_ITEMS = gql`
+  {
+    cartItems @client
+  }
+`;
+
 // root = parent for a item, a collection is the root
 // args = args passed in to the resolver
 // context = things apollo has access to
@@ -35,6 +42,20 @@ export const resolvers = {
         data: { cartHidden: !data.cartHidden },
       });
       return !data.cartHidden;
+    },
+    AddItemToCart: (_root, { item }, { cache }) => {
+      const { cartItems } = cache.readQuery({
+        query: GET_CART_ITEMS,
+      });
+      console.log(cartItems);
+      const newCartItems = addItemToCart(cartItems, item);
+
+      cache.writeQuery({
+        query: GET_CART_ITEMS,
+        data: { cartItems: newCartItems },
+      });
+      console.log(newCartItems);
+      return newCartItems;
     },
   },
 };
