@@ -11,6 +11,8 @@ import { ApolloClient, gql } from "apollo-boost";
 import "./index.css";
 import App from "./App";
 
+import { resolvers, typeDefs } from "./graphql/resolvers";
+
 //connection to backend
 
 const httpLink = createHttpLink({
@@ -22,26 +24,36 @@ const cache = new InMemoryCache();
 const client = new ApolloClient({
   link: httpLink,
   cache,
+  resolvers,
+  typeDefs,
 });
 
-client
-  .query({
-    query: gql`
-      {
-        getCollectionsByTitle(title: "hats") {
-          id
-          title
-          items {
-            id
-            name
-            price
-            imageUrl
-          }
-        }
-      }
-    `,
-  })
-  .then((resp) => console.log(resp));
+// client
+//   .query({
+//     query: gql`
+//       {
+//         getCollectionsByTitle(title: "hats") {
+//           id
+//           title
+//           items {
+//             id
+//             name
+//             price
+//             imageUrl
+//           }
+//         }
+//       }
+//     `,
+//   })
+//   .then((resp) => console.log(resp));
+
+// create init state
+client.writeData({
+  data: {
+    cartHidden: true,
+    cartItems: [],
+  },
+});
 
 ReactDOM.render(
   <ApolloProvider client={client}>
