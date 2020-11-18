@@ -46,6 +46,7 @@ import { Redirect } from "react-router-dom";
 
 const Cart = ({ cartItems, toggleCartHidden }) => {
   let history = useHistory();
+  console.log(cartItems, "DROP_DOWN");
   return (
     <StyledCartDropDown>
       <StyledCartItems>
