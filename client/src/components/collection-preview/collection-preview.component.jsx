@@ -6,11 +6,13 @@ import {
   StyledPreview,
   StyledTitle,
 } from "./collection-preview.styles";
+import { useLocation } from "react-router-dom";
 
 const CollectionPreview = ({ title, items, ...otherProps }) => {
+  const location = useLocation();
   return (
     <StyledCollectionWrapper>
-      <StyledTitle to={`${otherProps.path}/${otherProps.routeName}`}>
+      <StyledTitle to={`${location.pathname}/${title.toLowerCase()}`}>
         {title.toUpperCase()}
       </StyledTitle>
       <StyledPreview>
@@ -25,3 +27,5 @@ const CollectionPreview = ({ title, items, ...otherProps }) => {
 };
 
 export default CollectionPreview;
+
+// to={`${otherProps.path}/${otherProps.routeName}`
