@@ -13,6 +13,7 @@ import {
   StyledCartItems,
   StyledMessage,
 } from "./cart-dropdown.styles";
+import { Redirect } from "react-router-dom";
 
 // const Cart = ({ cartItems, history, toggleCartHidden }) => (
 //   <StyledCartDropDown>
@@ -60,6 +61,7 @@ const Cart = ({ cartItems, toggleCartHidden }) => {
         onClick={() => {
           toggleCartHidden();
           history.push("/checkout");
+          //<Redirect to="/" />;
         }}
       >
         CHECKOUT
