@@ -1,6 +1,8 @@
 import React from "react";
-import { Mutation } from "react-apollo";
+// import { Mutation, Query } from "react-apollo";
+import { graphql } from "react-apollo";
 import { gql } from "apollo-boost";
+import { flowRight } from "lodash";
 
 import CartIcon from "./cart-icon.component";
 
@@ -9,10 +11,19 @@ const TOGGLE_CART_HIDDEN = gql`
     toggleCartHidden @client
   }
 `;
-const CartIconContainer = () => (
-  <Mutation mutation={TOGGLE_CART_HIDDEN}>
-    {(toggleCartHidden) => <CartIcon toggleCartHidden={toggleCartHidden} />}
-  </Mutation>
+
+const GET_ITEM_COUNT = gql`
+  {
+    itemCount @client
+  }
+`;
+
+const CartIconContainer = ({ data: { itemCount }, toggleCartHidden }) => (
+  <CartIcon toggleCartHidden={toggleCartHidden} itemCount={itemCount} />
 );
 
-export default CartIconContainer;
+export default flowRight(
+  graphql(GET_ITEM_COUNT),
+  //mutations need second arg to rename what it calls the mutation, can do this for queries as well so they arent namespaced as data
+  graphql(TOGGLE_CART_HIDDEN, { name: "toggleCartHidden" })
+)(CartIconContainer);
