@@ -31,4 +31,4 @@ const CollectionItem = ({ item, addItem }) => {
   );
 };
 
-export default connect(null, { addItem })(CollectionItem);
+export default CollectionItem;
