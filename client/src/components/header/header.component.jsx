@@ -12,7 +12,7 @@ import {
   OptionsContainer,
 } from "./header.styles";
 import { default as CartIcon } from "../cart-icon/cart-icon.container";
-import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+import { default as CartDropdown } from "../cart-dropdown/cart-dropdown.container";
 import { signOutStart } from "../../redux/user/user.actions.js";
 
 const Header = ({ currentUser, hidden, signOutStart }) => (
