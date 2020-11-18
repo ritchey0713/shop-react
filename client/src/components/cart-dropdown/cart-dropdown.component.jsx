@@ -1,13 +1,11 @@
 import React from "react";
-import { connect } from "react-redux";
 // import { withRouter } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import CartItem from "../cart-item/cart-item.component";
-import { selectCartitems } from "../../redux/cart/cart.selectors.js";
+
 import CustomButton from "../custom-button/custom-button.component";
 import "./cart-dropdown.styles.scss";
-import { createStructuredSelector } from "reselect";
-import { toggleCartHidden } from "../../redux/cart/cart.actions.js";
+
 import {
   StyledCartDropDown,
   StyledCartItems,
@@ -74,9 +72,5 @@ const Cart = ({ cartItems, toggleCartHidden }) => {
 //   cartItems,
 // });
 
-const mapStateToProps = createStructuredSelector({
-  cartItems: selectCartitems,
-});
-
 //withRouter can take a comp as an arg, including connected comps
-export default connect(mapStateToProps, { toggleCartHidden })(Cart);
+export default Cart;
