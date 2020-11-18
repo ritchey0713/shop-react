@@ -1,6 +1,6 @@
 // import React, { Component } from "react";
 import React, { useEffect } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "./App.css";
@@ -15,6 +15,7 @@ import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 import CheckOutContainer from "./pages/check-out/check-out.container";
 import { checkUserSession } from "./redux/user/user.actions";
 import { firestore } from "./firebase/firebase.utils";
+import { getSnapshotFromUserAuth } from "./redux/user/user.sagas";
 const App = ({ checkUserSession, currentUser }) => {
   // pass [checkUserSession as it is passed in from mapDIspatch, so it wont allow it to fire several times]
   useEffect(() => {
@@ -65,6 +66,7 @@ const App = ({ checkUserSession, currentUser }) => {
   //   this.unsubscribeFromAuth();
   // }
 
+  const history = useHistory();
   return (
     <div>
       <Header />
