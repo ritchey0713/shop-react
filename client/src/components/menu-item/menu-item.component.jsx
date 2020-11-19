@@ -8,7 +8,6 @@ import {
   StyledSubtitle,
   StyledTitle,
 } from "./menu-item.styles";
-import "./menu-item.styles.scss";
 
 // const MenuItem = ({ title, imageUrl, size, history, match, linkUrl }) => (
 //   <StyledMenuItem className={size} onClick={() => history.push(`${match.url}${linkUrl}`)}>
@@ -32,7 +31,7 @@ const MenuItem = ({ title, imageUrl, size, linkUrl }) => {
       onClick={() => history.push(`${url.pathname}${linkUrl}`)}
     >
       <StyledImg imageUrl={imageUrl} className="background-image" />
-      <StyledContent>
+      <StyledContent className="content">
         <StyledTitle>{title.toUpperCase()}</StyledTitle>
         <StyledSubtitle> SHOP NOW </StyledSubtitle>
       </StyledContent>
