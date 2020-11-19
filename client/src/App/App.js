@@ -16,6 +16,8 @@ import CheckOutContainer from "../pages/check-out/check-out.container";
 import { checkUserSession } from "../redux/user/user.actions";
 import { firestore } from "../firebase/firebase.utils";
 import { getSnapshotFromUserAuth } from "../redux/user/user.sagas";
+import { GlobalStyle } from "../global.styles";
+
 const App = ({ checkUserSession, currentUser, setCurrentUser }) => {
   // pass [checkUserSession as it is passed in from mapDIspatch, so it wont allow it to fire several times]
   useEffect(() => {
@@ -69,19 +71,21 @@ const App = ({ checkUserSession, currentUser, setCurrentUser }) => {
   const history = useHistory();
   return (
     <div>
-      <Header />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/shop" component={ShopPage} />
-        <Route exact path="/checkout" component={CheckOutContainer} />
-        <Route
-          exact
-          path="/signin"
-          render={() =>
-            currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
-          }
-        />
-      </Switch>
+      <GlobalStyle>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckOutContainer} />
+          <Route
+            exact
+            path="/signin"
+            render={() =>
+              currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
+            }
+          />
+        </Switch>
+      </GlobalStyle>
     </div>
   );
 };
