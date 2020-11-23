@@ -1,12 +1,21 @@
 import React from "react";
 import "./checkout-item.styles.scss";
 import { connect } from "react-redux";
+// import {
+//   clearItem,
+//   addItem,
+//   removeItem,
+// } from "../../redux/cart/cart.actions.js";
 import {
-  clearItem,
-  addItem,
-  removeItem,
-} from "../../redux/cart/cart.actions.js";
-import { StyledArrow, StyledButton, StyledImg, StyledImgWrapper, StyledItemDiv, StyledQuantitySpan, StyledSpan, StyledValue } from "./checkout-item.styles"
+  StyledArrow,
+  StyledButton,
+  StyledImg,
+  StyledImgWrapper,
+  StyledItemDiv,
+  StyledQuantitySpan,
+  StyledSpan,
+  StyledValue,
+} from "./checkout-item.styles";
 
 const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
   const { imageUrl, price, name, quantity } = cartItem;
@@ -17,20 +26,14 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
       </StyledImgWrapper>
       <StyledSpan>{name}</StyledSpan>
       <StyledQuantitySpan>
-        <StyledArrow onClick={() => removeItem(cartItem)}>
-          &#10094;
-        </StyledArrow>
+        <StyledArrow onClick={() => removeItem(cartItem)}>&#10094;</StyledArrow>
         <StyledValue>{quantity}</StyledValue>
-        <StyledArrow onClick={() => addItem(cartItem)}>
-          &#10095;
-        </StyledArrow>
+        <StyledArrow onClick={() => addItem(cartItem)}>&#10095;</StyledArrow>
       </StyledQuantitySpan>
       <StyledSpan> {price}</StyledSpan>
-      <StyledButton onClick={() => clearItem(cartItem)}>
-        &#10007;
-      </StyledButton>
+      <StyledButton onClick={() => clearItem(cartItem)}>&#10007;</StyledButton>
     </StyledItemDiv>
   );
 };
 
-export default connect(null, { clearItem, addItem, removeItem })(CheckoutItem);
+export default CheckoutItem;
