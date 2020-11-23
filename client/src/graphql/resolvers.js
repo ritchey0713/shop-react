@@ -1,5 +1,11 @@
 import { gql } from "apollo-boost";
-import { addItemToCart, getCartItemCount, getCartTotal } from "./cart.utils";
+import {
+  addItemToCart,
+  getCartItemCount,
+  getCartTotal,
+  clearItemFromCart,
+  removeItemFromCart,
+} from "./cart.utils";
 
 // entend to eisting type of mutation on backend (graphql server)
 // type definitions must be capitalized
@@ -62,6 +68,7 @@ export const resolvers = {
       return !data.cartHidden;
     },
     AddItemToCart: (_root, { item }, { cache }) => {
+      console.log("ADD_ITEM");
       const { cartItems } = cache.readQuery({
         query: GET_CART_ITEMS,
       });
@@ -92,6 +99,57 @@ export const resolvers = {
         data: { currentUser: user },
       });
       return user;
+    },
+
+    clearItemFromCart: (_root, { item }, { cache }) => {
+      console.log("CLEAR_ITEM");
+      const { cartItems } = cache.readQuery({
+        query: GET_CART_ITEMS,
+      });
+
+      const newCartItems = clearItemFromCart(cartItems, item);
+
+      cache.writeQuery({
+        query: GET_CART_ITEMS,
+        data: { cartItems: newCartItems },
+      });
+
+      cache.writeQuery({
+        query: GET_CART_TOTAL,
+        data: { cartTotal: getCartTotal(newCartItems) },
+      });
+
+      cache.writeQuery({
+        query: GET_ITEM_COUNT,
+        data: { itemCount: getCartItemCount(newCartItems) },
+      });
+
+      return newCartItems;
+    },
+
+    removeItemFromCart: (_root, { item }, { cache }) => {
+      const { cartItems } = cache.readQuery({
+        query: GET_CART_ITEMS,
+      });
+
+      const newCartItems = removeItemFromCart(cartItems, item);
+
+      cache.writeQuery({
+        query: GET_CART_ITEMS,
+        data: { cartItems: newCartItems },
+      });
+
+      cache.writeQuery({
+        query: GET_CART_TOTAL,
+        data: { cartTotal: getCartTotal(newCartItems) },
+      });
+
+      cache.writeQuery({
+        query: GET_ITEM_COUNT,
+        data: { itemCount: getCartItemCount(newCartItems) },
+      });
+
+      return newCartItems;
     },
   },
 };
