@@ -1,5 +1,5 @@
 import { gql } from "apollo-boost";
-import { addItemToCart, getCartItemCount } from "./cart.utils";
+import { addItemToCart, getCartItemCount, getCartTotal } from "./cart.utils";
 
 // entend to eisting type of mutation on backend (graphql server)
 // type definitions must be capitalized
@@ -24,6 +24,12 @@ const GET_CART_HIDDEN = gql`
 const GET_ITEM_COUNT = gql`
   {
     itemCount @client
+  }
+`;
+
+const GET_CART_TOTAL = gql`
+  {
+    cartTotal @client
   }
 `;
 
@@ -65,6 +71,11 @@ export const resolvers = {
       cache.writeQuery({
         query: GET_ITEM_COUNT,
         data: { itemCount: getCartItemCount(newCartItems) },
+      });
+
+      cache.writeQuery({
+        query: GET_CART_TOTAL,
+        data: { cartTotal: getCartTotal(newCartItems) },
       });
 
       cache.writeQuery({
