@@ -1,22 +1,31 @@
 // import React, { Component } from "react";
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "./App.css";
-import HomePage from "../pages/homepage/homepage.component";
-import ShopPage from "../pages/shop/shop.component";
+// import HomePage from "../pages/homepage/homepage.component";
+// import ShopPage from "../pages/shop/shop.component";
 import { default as Header } from "../components/header/header.container";
-import SignInAndSignUpPage from "../pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
+// import SignInAndSignUpPage from "../pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 //import CheckoutPage from "./pages/check-out/check-out.component";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../redux/user/user.selectors";
 import { selectCollectionsForPreview } from "../redux/shop/shop.selectors";
-import CheckOutContainer from "../pages/check-out/check-out.container";
+// import CheckOutContainer from "../pages/check-out/check-out.container";
 import { checkUserSession } from "../redux/user/user.actions";
 import { firestore } from "../firebase/firebase.utils";
 import { getSnapshotFromUserAuth } from "../redux/user/user.sagas";
 import { GlobalStyle } from "../global.styles";
+
+const HomePage = lazy(() => import("../pages/homepage/homepage.component"));
+const ShopPage = lazy(() => import("../pages/shop/shop.component"));
+const CheckOutContainer = lazy(() =>
+  import("../pages/check-out/check-out.container")
+);
+const SignInAndSignUpPage = lazy(() =>
+  import("../pages/sign-in-and-sign-up/sign-in-and-sign-up.component")
+);
 
 const App = ({ checkUserSession, currentUser, setCurrentUser }) => {
   // pass [checkUserSession as it is passed in from mapDIspatch, so it wont allow it to fire several times]
@@ -74,16 +83,18 @@ const App = ({ checkUserSession, currentUser, setCurrentUser }) => {
       <GlobalStyle />
       <Header />
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/shop" component={ShopPage} />
-        <Route exact path="/checkout" component={CheckOutContainer} />
-        <Route
-          exact
-          path="/signin"
-          render={() =>
-            currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
-          }
-        />
+        <Suspense fallback={<div>... Loading </div>}>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckOutContainer} />
+          <Route
+            exact
+            path="/signin"
+            render={() =>
+              currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
+            }
+          />
+        </Suspense>
       </Switch>
     </div>
   );
