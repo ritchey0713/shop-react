@@ -17,6 +17,8 @@ import { checkUserSession } from "../redux/user/user.actions";
 import { firestore } from "../firebase/firebase.utils";
 import { getSnapshotFromUserAuth } from "../redux/user/user.sagas";
 import { GlobalStyle } from "../global.styles";
+import WithSpinner from "../components/with-spinner/with-spinner.component";
+import Spinner from "../components/spinner/spinner.component";
 
 const HomePage = lazy(() => import("../pages/homepage/homepage.component"));
 const ShopPage = lazy(() => import("../pages/shop/shop.component"));
@@ -83,7 +85,7 @@ const App = ({ checkUserSession, currentUser, setCurrentUser }) => {
       <GlobalStyle />
       <Header />
       <Switch>
-        <Suspense fallback={<div>... Loading </div>}>
+        <Suspense fallback={<Spinner />}>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
           <Route exact path="/checkout" component={CheckOutContainer} />
