@@ -54,6 +54,7 @@ client.writeData({
     cartItems: [],
     itemCount: 0,
     currentUser: null,
+    cartTotal: 0,
   },
 });
 
